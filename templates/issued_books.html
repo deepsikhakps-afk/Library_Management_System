@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Issued Books{% endblock %}
+{% block content %}
+<h2>Issued Books Records</h2>
+<table class="data-table">
+    <tr>
+        <th>Book</th><th>Student</th><th>Issue Date</th><th>Due Date</th><th>Status</th><th>Action</th>
+    </tr>
+    {% for r in records %}
+    <tr>
+        <td>{{ r.title }}</td>
+        <td>{{ r.name }}</td>
+        <td>{{ r.issue_date }}</td>
+        <td>{{ r.due_date }}</td>
+        <td>
+            {% if r.return_date %}
+                <span class="badge-returned">Returned {{ r.return_date }}</span>
+            {% elif r.due_date < today %}
+                <span class="badge-overdue">Overdue</span>
+            {% else %}
+                <span class="badge-active">Active</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if not r.return_date %}
+                <a href="{{ url_for('return_book', issue_id=r.id) }}" class="btn-small">Mark Returned</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

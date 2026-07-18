@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>{{ total_books }}</h3>
+        <p>Total Books</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ available_books }}</h3>
+        <p>Available Copies</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ active_issues }}</h3>
+        <p>Currently Issued</p>
+    </div>
+</div>
+
+<div class="quick-links">
+    <a href="{{ url_for('add_book') }}" class="btn-primary">+ Add New Book</a>
+    <a href="{{ url_for('issued_books') }}" class="btn-secondary">View Issued Books</a>
+</div>
+{% endblock %}

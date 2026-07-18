@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}My Dashboard{% endblock %}
+{% block content %}
+<h2>My Dashboard</h2>
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>{{ total_books }}</h3>
+        <p>Total Books in Library</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ available_books }}</h3>
+        <p>Available Copies</p>
+    </div>
+</div>
+
+<h3>My Issued Books</h3>
+{% if my_books %}
+<table class="data-table">
+    <tr><th>Title</th><th>Issue Date</th><th>Due Date</th></tr>
+    {% for b in my_books %}
+    <tr>
+        <td>{{ b.title }}</td>
+        <td>{{ b.issue_date }}</td>
+        <td>{{ b.due_date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>You have no books issued currently. <a href="{{ url_for('books') }}">Browse books</a></p>
+{% endif %}
+{% endblock %}
